@@ -13,17 +13,17 @@ function foo(left: number[], right: number[]) {
 function bar(left: number[], counts: Record<string, number>) {
   let sum = 0;
   for (const e of left) {
-    if (!counts[e]) continue;
-    sum += e * counts[e];
+    sum += e * (counts[e] ?? 0);
   }
   return sum;
 }
 
 if (import.meta.main) {
+  const data = readByLine(import.meta.dirname + "/input");
   // 1
   const [left, right] = (() => {
     const left = [], right = [];
-    for (const line of readByLine(import.meta.dirname + "/input")) {
+    for (const line of data) {
       const [l, r] = line.split(/\s+/);
       left.push(+l);
       right.push(+r);
@@ -36,8 +36,7 @@ if (import.meta.main) {
   const [counts] = (() => {
     const counts: Record<string, number> = {};
     for (const e of right) {
-      if (!counts[e]) counts[e] = 0;
-      counts[e]++;
+      counts[e] = (counts[e] ?? 0) + 1;
     }
     return [counts];
   })();
