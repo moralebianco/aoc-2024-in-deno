@@ -3,10 +3,9 @@ import { readInput } from "../util.ts";
 function foo(reports: number[][]) {
   let sum = 0;
   function check(report: number[]) {
-    const flag = report[0] < report[1];
+    const unit = report[0] < report[1] ? -1 : 1;
     for (let i = 0; i < report.length - 1; i++) {
-      let diff = report[i] - report[i + 1];
-      if (flag) diff *= -1;
+      const diff = (report[i] - report[i + 1]) * unit;
       if (1 > diff || diff > 3) return 0;
     }
     return 1;
@@ -18,10 +17,9 @@ function foo(reports: number[][]) {
 function bar(reports: number[][]) {
   let sum = 0;
   function getIndex(report: number[], start = 0) {
-    const flag = report[0] < report[1];
+    const unit = report[0] < report[1] ? -1 : 1;
     for (let i = start; i < report.length - 1; i++) {
-      let diff = report[i] - report[i + 1];
-      if (flag) diff *= -1;
+      const diff = (report[i] - report[i + 1]) * unit;
       if (1 > diff || diff > 3) return i;
     }
     return -1;
