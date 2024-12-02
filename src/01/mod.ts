@@ -1,4 +1,4 @@
-import { readByLine } from "../util.ts";
+import { readInput } from "../util.ts";
 
 function foo(left: number[], right: number[]) {
   let sum = 0;
@@ -19,7 +19,7 @@ function bar(left: number[], counts: Record<string, number>) {
 }
 
 if (import.meta.main) {
-  const data = readByLine(import.meta.dirname + "/input");
+  const data = readInput(import.meta.dirname + "/input");
   // 1
   const [left, right] = (() => {
     const left = [], right = [];

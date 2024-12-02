@@ -1,4 +1,4 @@
-import { readByLine } from "../util.ts";
+import { readInput } from "../util.ts";
 
 function foo(reports: number[][]) {
   let sum = 0;
@@ -41,7 +41,7 @@ function bar(reports: number[][]) {
 }
 
 if (import.meta.main) {
-  const data = readByLine(import.meta.dirname + "/input");
+  const data = readInput(import.meta.dirname + "/input");
   // 1
   const reports = (() => {
     const matrix = [];
