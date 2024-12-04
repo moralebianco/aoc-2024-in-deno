@@ -1,10 +1,9 @@
 import { readInput } from "../util.ts";
 
-const regPattern = /(?=(XMAS|SAMX))/g;
-
 function foo(puzzle: string[]) {
   let sum = 0;
   const size = puzzle.length;
+  const regPattern = /(?=(XMAS|SAMX))/g;
 
   // Horizontal
   for (const h of puzzle) {
@@ -40,9 +39,28 @@ function foo(puzzle: string[]) {
   return sum;
 }
 
+function bar(puzzle: string[]) {
+  let sum = 0;
+  const size = puzzle.length;
+  const regPattern = /(MAS|SAM)/g;
+
+  for (let i = 1; i < size - 1; i++) {
+    for (let j = 1; j < size - 1; j++) {
+      const ch = puzzle[i].charAt(j);
+      const dL = puzzle[i - 1].at(j - 1) + ch + puzzle[i + 1].at(j + 1);
+      const dR = puzzle[i + 1].at(j - 1) + ch + puzzle[i - 1].at(j + 1);
+      if (dL.match(regPattern) && dR.match(regPattern)) sum++;
+    }
+  }
+
+  return sum;
+}
+
 if (import.meta.main) {
   const data = readInput(import.meta.dirname + "/input");
   // 1
   const puzzle = [...data];
   console.log(foo(puzzle));
+  // 2
+  console.log(bar(puzzle));
 }
