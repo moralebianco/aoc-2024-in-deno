@@ -41,13 +41,10 @@ function bar(reports: number[][]) {
 if (import.meta.main) {
   const data = readLines("02");
   // 1
-  const reports = (() => {
-    const matrix = [];
-    for (const line of data) {
-      matrix.push(line.split(/\s+/).map((e) => +e));
-    }
-    return matrix;
-  })();
+  const reports = [];
+  for (const line of data) {
+    reports.push(line.split(/\s+/).map((e) => +e));
+  }
   console.log(foo(reports));
   // 2
   console.log(bar(reports));
