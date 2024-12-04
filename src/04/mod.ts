@@ -1,4 +1,4 @@
-import { readInput } from "../util.ts";
+import { readLines } from "../util.ts";
 
 function foo(puzzle: string[]) {
   let sum = 0;
@@ -57,9 +57,9 @@ function bar(puzzle: string[]) {
 }
 
 if (import.meta.main) {
-  const data = readInput(import.meta.dirname + "/input");
+  const data = readLines("04");
   // 1
-  const puzzle = [...data];
+  const puzzle = data;
   console.log(foo(puzzle));
   // 2
   console.log(bar(puzzle));

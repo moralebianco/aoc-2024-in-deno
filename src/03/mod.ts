@@ -1,4 +1,4 @@
-import { readInput } from "../util.ts";
+import { readLines } from "../util.ts";
 
 function foo(operations: string[]) {
   let sum = 0;
@@ -10,7 +10,7 @@ function foo(operations: string[]) {
 }
 
 if (import.meta.main) {
-  let data = readInput(import.meta.dirname + "/input");
+  const data = readLines("03");
   // 1
   let opts = (() => {
     const arr: string[] = [];
@@ -21,7 +21,6 @@ if (import.meta.main) {
   })();
   console.log(foo(opts));
 
-  data = readInput(import.meta.dirname + "/input");
   // 2
   opts = (() => {
     let j = 0;
