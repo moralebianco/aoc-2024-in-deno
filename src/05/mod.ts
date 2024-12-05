@@ -1,26 +1,13 @@
 import { readLines } from "../util.ts";
 
-class Node {
-  children: Node[] = [];
-
-  constructor(readonly value: number) {}
-
-  addChild(child: Node) {
-    for (const c of this.children) {
-      if (c.value == child.value) return;
-    }
-    this.children.push(child);
-  }
-}
-
 function foo(rules: number[][], updates: number[][]) {
   let sum = 0;
-  const dict: Record<number, Node> = {};
+  const dict: Record<number, Set<number>> = {};
 
   for (const [x, y] of rules) {
-    dict[x] ??= new Node(x);
-    dict[y] ??= new Node(y);
-    dict[y].addChild(dict[x]);
+    dict[x] ??= new Set();
+    dict[y] ??= new Set();
+    dict[y].add(x);
   }
 
   for (const update of updates) {
@@ -32,8 +19,7 @@ function foo(rules: number[][], updates: number[][]) {
   function check(update: number[]) {
     for (let i = 0, j: number; i < update.length; i++) {
       for (j = i + 1; j < update.length; j++) {
-        const node = dict[update[j]];
-        if (!node.children.find((c) => c.value == update[i])) {
+        if (!dict[update[j]].has(update[i])) {
           return false;
         }
       }
