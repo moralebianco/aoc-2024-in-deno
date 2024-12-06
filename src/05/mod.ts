@@ -50,15 +50,15 @@ function bar(rules: number[][], updates: number[][]) {
     }
   }
 
-  function sort(list: number[], update: Set<number>) {
-    if (update.size == 0) return list;
-    const last = list[list.length - 1];
+  function sort(sorted: number[], update: Set<number>) {
+    if (update.size == 0) return sorted;
+    const last = sorted[sorted.length - 1];
     for (const e of update.intersection(dict[last])) {
-      list.push(e);
+      sorted.push(e);
       update.delete(e);
-      if (sort(list, update)) return list;
+      if (sort(sorted, update)) return sorted;
       update.add(e);
-      list.pop();
+      sorted.pop();
     }
   }
 
