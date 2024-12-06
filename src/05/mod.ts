@@ -1,11 +1,9 @@
 import { readLines } from "../util.ts";
 
 function check(update: number[], dict: Record<number, Set<number>>) {
-  for (let i = 0, j: number; i < update.length; i++) {
-    for (j = i + 1; j < update.length; j++) {
-      if (!dict[update[j]].has(update[i])) {
-        return false;
-      }
+  for (let i = 0; i < update.length; i++) {
+    for (let j = i + 1; j < update.length; j++) {
+      if (!dict[update[j]].has(update[i])) return false;
     }
   }
   return true;
@@ -16,11 +14,9 @@ function foo(rules: number[][], updates: number[][]) {
   const dict: Record<number, Set<number>> = {};
 
   for (const [x, y] of rules) {
-    dict[x] ??= new Set();
     dict[y] ??= new Set();
     dict[y].add(x);
   }
-
   for (const update of updates) {
     if (check(update, dict)) {
       sum += update[Math.floor(update.length / 2)];
@@ -32,21 +28,17 @@ function foo(rules: number[][], updates: number[][]) {
 
 function bar(rules: number[][], updates: number[][]) {
   let sum = 0;
-  const dict: Record<number, Set<number>> = {};
-  dict[-1] = new Set();
+  const dict: Record<number, Set<number>> = { 0: new Set() };
 
   for (const [x, y] of rules) {
-    dict[x] ??= new Set();
     dict[y] ??= new Set();
     dict[y].add(x);
-    dict[-1].add(y);
+    dict[0].add(y);
   }
-
   for (const update of updates) {
     if (!check(update, dict)) {
-      const pages = sort([-1], new Set(update));
-      if (pages == undefined) throw new Error();
-      sum += pages[pages.length / 2];
+      const pages = sort([0], new Set(update));
+      if (pages) sum += pages[pages.length / 2];
     }
   }
 
