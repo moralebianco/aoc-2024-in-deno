@@ -27,12 +27,12 @@ if (import.meta.main) {
     left.push(+l);
     right.push(+r);
   }
-  console.log("foo:", foo(left, right));
+  console.log(foo(left, right));
 
   // 2
   const counts: Record<string, number> = {};
   for (const e of right) {
     counts[e] = (counts[e] ?? 0) + 1;
   }
-  console.log("bar:", bar(left, counts));
+  console.log(bar(left, counts));
 }
