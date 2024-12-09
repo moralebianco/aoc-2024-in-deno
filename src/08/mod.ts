@@ -14,11 +14,7 @@ function foo(map: string[][]) {
   }
   for (const [_, v] of dict.entries()) {
     const pos = getPositions(v);
-    for (const [x, y] of pos) {
-      if (x >= 0 && x < map.length && y >= 0 && y < map[0].length) {
-        map[x][y] = "#";
-      }
-    }
+    for (const [x, y] of pos) map[x][y] = "#";
   }
   for (const row of map) {
     for (const e of row) if (e === "#") sum++;
@@ -30,8 +26,16 @@ function foo(map: string[][]) {
       for (let j = i + 1; j < arr.length; j++) {
         const xDiff = arr[j][0] - arr[i][0];
         const yDiff = arr[j][1] - arr[i][1];
-        pos.push([arr[i][0] - xDiff, arr[i][1] - yDiff]);
-        pos.push([arr[j][0] + xDiff, arr[j][1] + yDiff]);
+        const $0: Pos = [arr[i][0] - xDiff, arr[i][1] - yDiff];
+        const $1: Pos = [arr[j][0] + xDiff, arr[j][1] + yDiff];
+        if (
+          $0[0] >= 0 && $0[0] < map.length &&
+          $0[1] >= 0 && $0[1] < map[0].length
+        ) pos.push($0);
+        if (
+          $1[0] >= 0 && $1[0] < map.length &&
+          $1[1] >= 0 && $1[1] < map[0].length
+        ) pos.push($1);
       }
     }
     return pos;
